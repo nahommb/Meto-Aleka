@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:meto_aleka/presentation/widgets/list_of_events.dart';
 
 class detailScreen extends StatelessWidget {
   static final route_name = 'detail_screen';
@@ -35,7 +35,7 @@ class detailScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(20)),
                 gradient: LinearGradient(
-                  colors: [Color(0xFF601FF1), Colors.black], // Gradient colors
+                  colors: [Color(0xFF601FF1), Colors.lightBlue], // Gradient colors
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                 ),
@@ -54,8 +54,7 @@ class detailScreen extends StatelessWidget {
                 ],
               ),
             ),
-
-
+            listOfEvents()
           ],
         ),
       ),
