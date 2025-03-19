@@ -10,15 +10,33 @@ class homeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       // appBar: AppBar(title: Text('leee'),backgroundColor: Colors.greenAccent,),
       body: SafeArea(
         child: Column(
+
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SizedBox(
+              height: screenHeight*0.07,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+
+                TextButton(onPressed: (){}, child: Row(
+                  children: [
+                    Icon(Icons.create_outlined),
+                    SizedBox(width: 5,),
+                    Text('Create'),
+                  ],
+                )),
+              ],
+            ),
             Container(
-              height: 200,
-              margin: EdgeInsets.only(top: 70),
+             height: screenHeight*0.2,
               width: double.infinity,
               decoration: BoxDecoration(
                 // color: Colors.indigo,
@@ -28,9 +46,6 @@ class homeScreen extends StatelessWidget {
                 child: Text(formattedDate,style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),)
             ),
             dataList(),
-            Center(
-              child: Text("test"),
-            )
           ],
         ),
       ),

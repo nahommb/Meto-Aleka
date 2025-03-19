@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meto_aleka/presentation/screens/detail.dart';
 import 'package:meto_aleka/presentation/screens/home.dart';
 
 void main() {
@@ -13,6 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.dark(),
       routes: {
         homeScreen.route_name:(context)=>homeScreen(),
+        detailScreen.route_name:(context)=>detailScreen(),
       },
       home: homeScreen(),
     );
