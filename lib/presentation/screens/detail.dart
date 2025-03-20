@@ -7,9 +7,10 @@ class detailScreen extends StatelessWidget {
   static final route_name = 'detail_screen';
 
 
+
   void showPopupForm(BuildContext context,Function onSubmit) {
-    TextEditingController nameController = TextEditingController();
-    TextEditingController departmentController = TextEditingController();
+    TextEditingController reasonController = TextEditingController();
+    TextEditingController amountController = TextEditingController();
 
     showDialog(
       context: context,
@@ -21,15 +22,16 @@ class detailScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
-                controller: nameController,
-                decoration: InputDecoration(labelText: "Name"),
+                controller: reasonController,
+                decoration: InputDecoration(labelText: "Reason"),
               ),
               SizedBox(height: 10),
               TextField(
-                controller: departmentController,
-                decoration: InputDecoration(labelText: "Department"),
-                keyboardType: TextInputType.emailAddress,
+                controller: amountController,
+                decoration: InputDecoration(labelText: "Amount"),
+                keyboardType: TextInputType.number,
               ),
+
             ],
           ),
           actions: [
@@ -40,10 +42,10 @@ class detailScreen extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
 
-                String name = nameController.text;
-                String department = departmentController.text;
+                String reason = reasonController.text;
+                int amount = int.parse(amountController.text);;
                 // print("Name: $name, Department: $department");
-                onSubmit( 1,'migb',70,'12/07/25');
+                onSubmit( 1,reason,amount,'12/07/25');
                 Navigator.pop(context); // Close after submission
               },
               child: Text("Submit"),
@@ -56,6 +58,11 @@ class detailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final Map<String, dynamic>? args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
+
+    print(args);
+
     var data_provider = Provider.of<dataProvider>(context);
 
     return Scaffold(
@@ -115,7 +122,7 @@ class detailScreen extends StatelessWidget {
                 ],
               ),
             ),
-            listOfEvents()
+            listOfEvents(args?['id'])
           ],
         ),
       ),

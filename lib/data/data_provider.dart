@@ -8,8 +8,14 @@ class dataProvider with ChangeNotifier {
     return _data ;
   }
 
+  List<Map> _debutData = [];
+
+  List<Map> get debutData {
+    return _debutData ;
+  }
+
   Future<void> addData(Map newData)async {
-    _data.add(newData);
+    //_data.add(newData);
     final name = newData['name'];
     final dept = newData['department'];
    await _dbHelper.insertUser(name, dept);
@@ -20,8 +26,7 @@ class dataProvider with ChangeNotifier {
   Future<void> addDebutData(Map newDebut) async{
 
     await _dbHelper.insertDebut(newDebut['user_id'], newDebut['reason'], newDebut['amount_of_debut'], newDebut['date']);
-    getDebutData();
-
+     getDebutData(newDebut['user_id']);
     notifyListeners();
   }
   Future<void> getData()async {
@@ -32,9 +37,12 @@ class dataProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getDebutData() async{
-    var userDebut = await _dbHelper.getUsersDebut();
-    print(userDebut);
+  Future<void> getDebutData(int userId) async{
+    var userDebut = await _dbHelper.getUsersDebut(userId);
+
+    _debutData = userDebut;
+     print(_debutData);
+
     notifyListeners();
   }
 }

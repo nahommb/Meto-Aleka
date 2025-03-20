@@ -8,11 +8,11 @@ class DatabaseHelper {
     if (_db != null) return _db!;
 
     String path = join(await getDatabasesPath(), 'mydb.db');
-    _db = await openDatabase(path, version: 1, onCreate: (db, version) {
+    _db = await openDatabase(path, version: 1, onCreate: (db, version) async{
       try{
         db.execute("CREATE TABLE users(id INTEGER PRIMARY KEY, name TEXT, department TEXT)");
         db.execute("""
-      CREATE TABLE IF NOT EXISTS user_details(
+      CREATE TABLE user_details(
         id INTEGER PRIMARY KEY,
         user_id INTEGER,
         reason TEXT,
@@ -48,8 +48,8 @@ class DatabaseHelper {
     return db.insert('user_details', {'user_id':user_id,'reason':reason,'amount_of_debut':amount,'date':date});
   }
 
-  Future<List<Map<String, dynamic>>> getUsersDebut() async {
+  Future<List<Map<String, dynamic>>> getUsersDebut(int userId) async {
     final db = await database;
-    return db.query('user_details');
+    return db.query('user_details',where: 'user_id = ?',whereArgs: [userId] );
   }
 }

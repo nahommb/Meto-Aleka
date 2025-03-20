@@ -1,30 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
+import 'package:meto_aleka/data/data_provider.dart';
+import 'package:provider/provider.dart';
 
-class listOfEvents extends StatelessWidget {
+class listOfEvents extends StatefulWidget {
 
+  final id ;
+  listOfEvents(this.id);
+
+  @override
+  State<listOfEvents> createState() => _listOfEventsState();
+}
+
+class _listOfEventsState extends State<listOfEvents> {
   String formattedDate = DateFormat('d MMM yyyy').format(DateTime.now());
 
   @override
+  void initState() {
+    super.initState();
+
+    Future.microtask(() {
+      final data_list = Provider.of<dataProvider>(context, listen: false);
+      data_list.getDebutData(widget.id);
+    });
+  }
+
+
   Widget build(BuildContext context) {
+
+    final data_provider = Provider.of<dataProvider>(context);
+
     return Expanded(
         child:Container(
           margin: EdgeInsets.only(top: 20),
           padding: EdgeInsets.only(left: 10),
           child: ListView.builder(itemBuilder: (context,index)=>
               Dismissible(
-                key: Key('i8908098'),
+                key: Key(data_provider.debutData[index]['id'].toString()),
                 child: ListTile(
-                  title: Text('Migb'),
+                  title: Text('${data_provider.debutData[index]['reason']}'),
                   subtitle: Text(formattedDate),
-                  trailing: Text('65'),
+                  trailing: Text('${data_provider.debutData[index]['amount_of_debut']}'),
                   onLongPress: (){
                     print('test press');
                   },
                 ),
               ),
-            itemCount: 10,
+            itemCount: data_provider.debutData.length,
           ),
         )
     );

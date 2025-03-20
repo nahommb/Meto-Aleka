@@ -55,7 +55,10 @@ class _dataListState extends State<dataList> {
                 subtitle: Text('${data_list.data[0]['department']}'),
                 trailing: IconButton(onPressed: (){}, icon: Icon(Icons.delete)),
                 onTap: (){
-                  Navigator.pushNamed(context, detailScreen.route_name);
+                  Navigator.pushNamed(context, detailScreen.route_name, arguments: {
+                    'id': data_list.data[index]['id'],
+                    'name': 'John Doe'
+                  });
                 },
               ),
             ),
