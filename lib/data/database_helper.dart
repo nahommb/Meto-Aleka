@@ -52,4 +52,21 @@ class DatabaseHelper {
     final db = await database;
     return db.query('user_details',where: 'user_id = ?',whereArgs: [userId] );
   }
+
+  Future<Future<int>> deleteUser(int userId) async{
+
+    final db = await database;
+
+    return db.delete('users',where: 'id = ?',whereArgs: [userId]);
+
+  }
+
+
+  Future<Future<int>> deleteDebut(int debutId) async{
+
+    final db = await database;
+
+    return db.delete('user_details',where: 'id = ?',whereArgs: [debutId]);
+
+  }
 }

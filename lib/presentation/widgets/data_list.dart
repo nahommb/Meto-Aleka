@@ -51,9 +51,11 @@ class _dataListState extends State<dataList> {
               ),
               margin: EdgeInsets.only(top: 10),
               child: ListTile(
-                title: Text('${data_list.data[0]['name']}'),
-                subtitle: Text('${data_list.data[0]['department']}'),
-                trailing: IconButton(onPressed: (){}, icon: Icon(Icons.delete)),
+                title: Text('${data_list.data[index]['name']}'),
+                subtitle: Text('${data_list.data[index]['department']}'),
+                trailing: IconButton(onPressed: (){
+                  data_list.deleteUsers(data_list.data[index]['id']);
+                }, icon: Icon(Icons.delete)),
                 onTap: (){
                   Navigator.pushNamed(context, detailScreen.route_name, arguments: {
                     'id': data_list.data[index]['id'],

@@ -35,8 +35,16 @@ class _listOfEventsState extends State<listOfEvents> {
         child:Container(
           margin: EdgeInsets.only(top: 20),
           padding: EdgeInsets.only(left: 10),
+
           child: ListView.builder(itemBuilder: (context,index)=>
               Dismissible(
+                onDismissed: (direction) {
+                  print('ducky');
+                  data_provider.deleteDebut(data_provider.debutData[index]['user_id'], data_provider.debutData[index]['id']);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Debut Deleted')),
+                  );
+                },
                 key: Key(data_provider.debutData[index]['id'].toString()),
                 child: ListTile(
                   title: Text('${data_provider.debutData[index]['reason']}'),
@@ -48,6 +56,8 @@ class _listOfEventsState extends State<listOfEvents> {
                 ),
               ),
             itemCount: data_provider.debutData.length,
+            // reverse: true,
+            // shrinkWrap: true,
           ),
         )
     );

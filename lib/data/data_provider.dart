@@ -33,8 +33,8 @@ class dataProvider with ChangeNotifier {
   }
   Future<void> getData()async {
     var users = await _dbHelper.getUsers();
-    print(users);
-    _data = users;
+
+    _data = List.from(users.reversed);
     //print(data);
     notifyListeners();
   }
@@ -42,7 +42,8 @@ class dataProvider with ChangeNotifier {
   Future<void> getDebutData(int userId) async{
     var userDebut = await _dbHelper.getUsersDebut(userId);
 
-    _debutData = userDebut;
+    _debutData = List.from(userDebut.reversed);
+
      var totalDeboute = 0  ;
    // print(userDebut[1]['amount_of_debut']+totalDeboute);
     for(int i=0;i<userDebut.length;i++){
@@ -54,6 +55,19 @@ class dataProvider with ChangeNotifier {
     // print(totalDeboute);
     //  print(_debutData);
 
+    notifyListeners();
+  }
+
+  Future<void>deleteUsers(int userId) async{
+    await _dbHelper.deleteUser(5);
+    getData();
+    notifyListeners();
+  }
+
+  Future<void>deleteDebut(int userId,int debutId) async{
+  print(userId);
+    await _dbHelper.deleteDebut(debutId);
+    getDebutData(userId);
     notifyListeners();
   }
 }

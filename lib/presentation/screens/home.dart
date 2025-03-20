@@ -34,7 +34,7 @@ class homeScreen extends StatelessWidget {
               TextField(
                 controller: departmentController,
                 decoration: InputDecoration(labelText: "Department"),
-                keyboardType: TextInputType.emailAddress,
+
               ),
             ],
           ),
@@ -49,7 +49,9 @@ class homeScreen extends StatelessWidget {
                 String name = nameController.text;
                 String department = departmentController.text;
                // print("Name: $name, Department: $department");
-                onSubmit(name,department);
+                if(name.length>0){
+                  onSubmit(name,department);
+                }
                 Navigator.pop(context); // Close after submission
               },
               child: Text("Submit"),
