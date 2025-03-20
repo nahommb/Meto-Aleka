@@ -1,14 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:meto_aleka/data/data_provider.dart';
 import 'package:meto_aleka/presentation/screens/detail.dart';
-class dataList extends StatelessWidget {
+import 'package:provider/provider.dart';
+class dataList extends StatefulWidget {
   const dataList({super.key});
 
+  @override
+  State<dataList> createState() => _dataListState();
+}
 
+class _dataListState extends State<dataList> {
 
+  @override
+  void initState() {
+    super.initState();
+
+    Future.microtask(() {
+      final data_list = Provider.of<dataProvider>(context, listen: false);
+      data_list.getData();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
+    final data_list = Provider.of<dataProvider>(context);
 
     return Expanded(
       child: Container(
@@ -26,7 +42,7 @@ class dataList extends StatelessWidget {
         ),
 
         child: ListView.builder(
-          itemCount: 14,
+          itemCount: data_list.data.length,
           itemBuilder: (context, index) =>
             Container(
               decoration: BoxDecoration(
@@ -35,11 +51,10 @@ class dataList extends StatelessWidget {
               ),
               margin: EdgeInsets.only(top: 10),
               child: ListTile(
-                title: Text('Nahom Lee'),
-                subtitle: Text('Software'),
+                title: Text('${data_list.data[0]['name']}'),
+                subtitle: Text('${data_list.data[0]['department']}'),
                 trailing: IconButton(onPressed: (){}, icon: Icon(Icons.delete)),
                 onTap: (){
-                  print('clicked');
                   Navigator.pushNamed(context, detailScreen.route_name);
                 },
               ),

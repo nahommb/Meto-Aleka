@@ -48,7 +48,7 @@ class homeScreen extends StatelessWidget {
 
                 String name = nameController.text;
                 String department = departmentController.text;
-                print("Name: $name, Department: $department");
+               // print("Name: $name, Department: $department");
                 onSubmit(name,department);
                 Navigator.pop(context); // Close after submission
               },
@@ -83,8 +83,8 @@ class homeScreen extends StatelessWidget {
 
                 TextButton(onPressed: (){showPopupForm(context,(String name,String department){
                   data_Provider.addData({
-                    'Name':name,
-                    'Department':department
+                    'name':name,
+                    'department':department
                   });
                 });}, child: Row(
                   children: [

@@ -1,17 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:meto_aleka/data/database_helper.dart';
 
 class dataProvider with ChangeNotifier {
   List<Map> _data =[];
-
+  final DatabaseHelper _dbHelper = DatabaseHelper();
   List<Map> get data {
     return _data ;
   }
 
-  void addData(Map data){
-    _data.add(data);
+  Future<void> addData(Map newData)async {
+    _data.add(newData);
+    final name = newData['name'];
+    final dept = newData['department'];
+   await _dbHelper.insertUser(name, dept);
+    print(newData['name']);
+    getData();
+    notifyListeners();
+  }
+  Future<void> addDebutData(Map newDebut) async{
 
-    print(data);
+    await _dbHelper.insertDebut(newDebut['user_id'], newDebut['reason'], newDebut['amount_of_debut'], newDebut['date']);
+    getDebutData();
+
+    notifyListeners();
+  }
+  Future<void> getData()async {
+    var users = await _dbHelper.getUsers();
+    print(users);
+    _data = users;
+    //print(data);
     notifyListeners();
   }
 
+  Future<void> getDebutData() async{
+    var userDebut = await _dbHelper.getUsersDebut();
+    print(userDebut);
+    notifyListeners();
+  }
 }
