@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:meto_aleka/data/data_provider.dart';
 import 'package:meto_aleka/presentation/screens/detail.dart';
 import 'package:meto_aleka/presentation/screens/home.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (context)=>dataProvider())
+
+  ],
+  child:MyApp() ,) );
 }
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -12,6 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.dark(),
+      debugShowCheckedModeBanner: false,
       routes: {
         homeScreen.route_name:(context)=>homeScreen(),
         detailScreen.route_name:(context)=>detailScreen(),
