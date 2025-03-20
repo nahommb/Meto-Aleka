@@ -14,6 +14,8 @@ class dataProvider with ChangeNotifier {
     return _debutData ;
   }
 
+  late int total_debute = 0;
+
   Future<void> addData(Map newData)async {
     //_data.add(newData);
     final name = newData['name'];
@@ -41,7 +43,16 @@ class dataProvider with ChangeNotifier {
     var userDebut = await _dbHelper.getUsersDebut(userId);
 
     _debutData = userDebut;
-     print(_debutData);
+     var totalDeboute = 0  ;
+   // print(userDebut[1]['amount_of_debut']+totalDeboute);
+    for(int i=0;i<userDebut.length;i++){
+     totalDeboute = totalDeboute + int.parse(userDebut[i]['amount_of_debut'].toString());
+
+    }
+
+    total_debute = totalDeboute;
+    // print(totalDeboute);
+    //  print(_debutData);
 
     notifyListeners();
   }

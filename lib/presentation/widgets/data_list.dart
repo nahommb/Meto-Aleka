@@ -57,7 +57,7 @@ class _dataListState extends State<dataList> {
                 onTap: (){
                   Navigator.pushNamed(context, detailScreen.route_name, arguments: {
                     'id': data_list.data[index]['id'],
-                    'name': 'John Doe'
+                    'name':data_list.data[index]['name']
                   });
                 },
               ),

@@ -43,9 +43,9 @@ class detailScreen extends StatelessWidget {
               onPressed: () {
 
                 String reason = reasonController.text;
-                int amount = int.parse(amountController.text);;
+                int amount = int.parse(amountController.text);
                 // print("Name: $name, Department: $department");
-                onSubmit( 1,reason,amount,'12/07/25');
+                onSubmit(reason,amount,'12/07/25');
                 Navigator.pop(context); // Close after submission
               },
               child: Text("Submit"),
@@ -78,9 +78,9 @@ class detailScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 TextButton(onPressed: (){
-                  showPopupForm(context, (int user_id,String reason,int amount,String date){
+                  showPopupForm(context, (String reason,int amount,String date){
                     data_provider.addDebutData({
-                      'user_id':user_id,
+                      'user_id':args?['id'],
                       'reason':reason,
                       'amount_of_debut':amount,
                       'date':date
@@ -113,11 +113,11 @@ class detailScreen extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(10),
-                    child: Text('Nahom Lee',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25),),
+                    child: Text('${args?['name']}',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25),),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 60.0),
-                    child: Text('450',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+                    child: Text('${data_provider.total_debute} Birr',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
                   )
                 ],
               ),
