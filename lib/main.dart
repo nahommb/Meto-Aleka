@@ -3,17 +3,17 @@ import 'package:meto_aleka/data/data_provider.dart';
 import 'package:meto_aleka/presentation/screens/detail.dart';
 import 'package:meto_aleka/presentation/screens/home.dart';
 import 'package:provider/provider.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+//import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 void main() {
-  sqfliteFfiInit();
-  databaseFactory = databaseFactoryFfi;
+  //sqfliteFfiInit();
+  //databaseFactory = databaseFactoryFfi;   // for windows not for mobile
 
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (context)=>dataProvider())
 
   ],
-  child:MyApp() ,) );
+  child: MyApp() ,) );
 }
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

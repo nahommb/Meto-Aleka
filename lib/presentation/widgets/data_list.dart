@@ -44,16 +44,21 @@ class _dataListState extends State<dataList> {
         child: ListView.builder(
           itemCount: data_list.data.length,
           itemBuilder: (context, index) =>
+
             Container(
+
               decoration: BoxDecoration(
                   color: Colors.black,
                 borderRadius: BorderRadius.all(Radius.circular(10))
               ),
               margin: EdgeInsets.only(top: 10),
               child: ListTile(
+
                 title: Text('${data_list.data[index]['name']}'),
                 subtitle: Text('${data_list.data[index]['department']}'),
                 trailing: IconButton(onPressed: (){
+                  print('leeee');
+
                   data_list.deleteUsers(data_list.data[index]['id']);
                 }, icon: Icon(Icons.delete)),
                 onTap: (){

@@ -77,7 +77,7 @@ class homeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: screenHeight*0.07,
+              height: screenHeight*0.03,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,

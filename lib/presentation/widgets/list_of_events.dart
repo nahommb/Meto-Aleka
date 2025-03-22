@@ -38,12 +38,26 @@ class _listOfEventsState extends State<listOfEvents> {
 
           child: ListView.builder(itemBuilder: (context,index)=>
               Dismissible(
+                background: Container(padding: EdgeInsets.only(right: 20), color: Colors.red,child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Icon(Icons.delete,),
+                  ],
+                ),),
                 onDismissed: (direction) {
-                  print('ducky');
                   data_provider.deleteDebut(data_provider.debutData[index]['user_id'], data_provider.debutData[index]['id']);
+                  // data_provider.data.removeWhere((element) => element['id']==data_provider.debutData[index]['user_id'],);
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Debut Deleted')),
+                    SnackBar(
+                        backgroundColor: Colors.transparent,
+                        showCloseIcon: true,
+                        closeIconColor: Colors.white,
+                        // behavior: SnackBarBehavior.floating,
+                        duration: Duration(seconds: 2000),
+                        content: Text('Debut Deleted Successfully',style: TextStyle(color: Colors.white),),
+                    ),
                   );
+
                 },
                 key: Key(data_provider.debutData[index]['id'].toString()),
                 child: ListTile(
@@ -56,8 +70,6 @@ class _listOfEventsState extends State<listOfEvents> {
                 ),
               ),
             itemCount: data_provider.debutData.length,
-            // reverse: true,
-            // shrinkWrap: true,
           ),
         )
     );

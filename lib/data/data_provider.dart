@@ -59,13 +59,16 @@ class dataProvider with ChangeNotifier {
   }
 
   Future<void>deleteUsers(int userId) async{
-    await _dbHelper.deleteUser(5);
+    _data.removeWhere((element) => element['id'] == userId);
+    await _dbHelper.deleteUser(userId);
     getData();
     notifyListeners();
   }
 
   Future<void>deleteDebut(int userId,int debutId) async{
-  print(userId);
+  //print(userId);
+    _debutData.removeWhere((element) => element['id']==debutId,);
+    print(_debutData);
     await _dbHelper.deleteDebut(debutId);
     getDebutData(userId);
     notifyListeners();

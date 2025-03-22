@@ -70,10 +70,10 @@ class detailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 20,),
+            // SizedBox(height: 10,),
             IconButton(onPressed: (){
               Navigator.pop(context);
-            }, icon: Icon(Icons.arrow_back_ios_outlined)),
+            }, icon: Icon(Icons.arrow_back_ios_outlined,size: 18,)),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -97,7 +97,7 @@ class detailScreen extends StatelessWidget {
             ),
             Container(
               width: double.infinity,
-              height: 180,
+              height: 150,
               margin: EdgeInsets.all(10),
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
